@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+     docker { image 'node:18.16.0-alpine' }
 
     stages {
         stage("Verify tooling"){
