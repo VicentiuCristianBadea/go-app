@@ -4,6 +4,10 @@ pipeline {
     }
 
     stages {
+         stage('Initialize'){
+            def dockerHome = tool 'docker-latest'
+            env.PATH = "${dockerHome}/bin:${env.PATH}"
+        }
         stage("Verify tooling"){
             steps {
                 sh 'docker version'
@@ -14,7 +18,6 @@ pipeline {
                 sh 'go --version'
             }
         }
-
         stage('Build') {
             steps {
                 echo "Building.."
