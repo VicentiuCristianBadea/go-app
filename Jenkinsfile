@@ -1,14 +1,15 @@
 pipeline {
     agent any
-    
+
     stages {
         stage("Verify tooling"){
             steps {
-                sh 'docker --version'
-                sh 'docker-compose --version'
-                sh 'kubectl version --client'
-                sh 'helm version --client'
-                sh 'go version'
+                sh 'docker version'
+                sh 'docker info'
+                sh 'docker compose version'
+                sh 'curl --version'
+                sh 'jq --version'
+                sh 'go --version'
             }
         }
 
