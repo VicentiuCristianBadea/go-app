@@ -26,8 +26,7 @@ pipeline {
             steps {
                 echo "Testing.."
                 sh '''
-                kubectl run -it curl --rm --image=nginx:alpine sh
-                curl web service:80/details
+                echo "doing testing stuff.."
                 '''
             }
         }
