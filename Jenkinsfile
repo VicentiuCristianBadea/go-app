@@ -8,6 +8,16 @@ pipeline {
         pollSCM '* * * * *'
     }
     stages {
+        stage("Verify tooling"){
+            steps {
+                sh 'docker --version'
+                sh 'docker-compose --version'
+                sh 'kubectl version --client'
+                sh 'helm version --client'
+                sh 'go version'
+            }
+        }
+
         stage('Build') {
             steps {
                 echo "Building.."
