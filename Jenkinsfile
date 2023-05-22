@@ -7,7 +7,7 @@ pipeline {
         spec:
           containers:
           - name: docker
-            image: docker:latest
+            image: golang:1.19
             command:
             - cat
             tty: true
