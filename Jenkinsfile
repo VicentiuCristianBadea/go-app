@@ -6,6 +6,11 @@ pipeline {
         kind: Pod
         spec:
           containers:
+          - name: golang
+            image: golang:1.16
+            command:
+            -  cat
+            tty: true
           - name: docker
             image: docker:latest
             command:
@@ -25,10 +30,11 @@ pipeline {
         stage("Verify tooling"){
             steps {
                 container('docker'){
-                    sh' sudo snap install go --classic'
                     sh 'docker version'
                     sh 'docker info'
                     sh 'docker compose version'
+                }
+                container('golang'){
                     sh 'go --version'
                 }
             }
@@ -36,11 +42,18 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Building.."
-                sh '''
-                go mod download
-                go build main.go
-                docker compose build 
-                '''
+                
+                container('golang'){
+                    sh '''
+                        go mod download
+                        go build main.go
+                    '''
+                }
+                container('docker'){
+                    sh '''
+                        docker compose build
+                    '''
+                } 
             }
         }
         stage('Test') {
@@ -56,8 +69,10 @@ pipeline {
                 echo 'Deliver....'
                 sh '''
                 echo "doing delivery stuff.."
-                docker compose push
                 '''
+                container('docker'){
+                    sh'docker compose push'
+                }
             }
         }
     }
