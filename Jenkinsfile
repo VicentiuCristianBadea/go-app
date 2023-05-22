@@ -19,6 +19,11 @@ pipeline {
             volumeMounts:
              - mountPath: /var/run/docker.sock
                name: docker-sock
+            resources:
+                requests:
+                    cpu: "500m"
+                limits:
+                    cpu: "1000m"
           volumes:
           - name: docker-sock
             hostPath:
