@@ -51,8 +51,7 @@ pipeline {
                 }
                 container('docker'){
                     sh '''
-                        cd scripts
-                        chmod +x ./getVersion.sh 
+                        chmod +x ./scripts/getVersion.sh 
                         ./getVersion.sh
                         docker compose build
                     '''
