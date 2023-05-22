@@ -7,7 +7,7 @@ pipeline {
         spec:
           containers:
           - name: docker
-            image: golang:1.19
+            image: docker:latest
             command:
             - cat
             tty: true
@@ -25,6 +25,7 @@ pipeline {
         stage("Verify tooling"){
             steps {
                 container('docker'){
+                    sh' sudo snap install go --classic'
                     sh 'docker version'
                     sh 'docker info'
                     sh 'docker compose version'
