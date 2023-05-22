@@ -1,14 +1,37 @@
 pipeline {
-    agent kubernetes
+    agent {
+    kubernetes {
+      yaml '''
+        apiVersion: v1
+        kind: Pod
+        spec:
+          containers:
+          - name: docker
+            image: docker:latest
+            command:
+            - cat
+            tty: true
+            volumeMounts:
+             - mountPath: /var/run/docker.sock
+               name: docker-sock
+          volumes:
+          - name: docker-sock
+            hostPath:
+              path: /var/run/docker.sock    
+        '''
+    }
+  }
     stages {
         stage("Verify tooling"){
             steps {
-                sh 'docker version'
-                sh 'docker info'
-                sh 'docker compose version'
-                sh 'curl --version'
-                sh 'jq --version'
-                sh 'go --version'
+                container('docker'){
+                    sh 'docker version'
+                    sh 'docker info'
+                    sh 'docker compose version'
+                    sh 'curl --version'
+                    sh 'jq --version'
+                    sh 'go --version'
+                }
             }
         }
         stage('Build') {
