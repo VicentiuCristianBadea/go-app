@@ -12,7 +12,7 @@ pipeline {
             -  cat
             tty: true
           - name: docker
-            image: docker:latest
+            image: vilybadea/docker-agent:latest
             command:
             - cat
             tty: true
