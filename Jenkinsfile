@@ -72,6 +72,7 @@ pipeline {
                 '''
                 container('docker'){
                     withCredentials([usernamePassword(credentialsId: 'd68ec99f-993a-4d73-86dc-3aeb3628d12e', passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER')]) {
+                        sh 'cd scripts; ./getVersion.sh'
                         sh 'echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin'
                         sh "docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}"
                         sh 'docker compose push'
