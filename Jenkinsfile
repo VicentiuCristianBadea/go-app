@@ -28,8 +28,6 @@ pipeline {
                     sh 'docker version'
                     sh 'docker info'
                     sh 'docker compose version'
-                    sh 'curl --version'
-                    sh 'jq --version'
                     sh 'go --version'
                 }
             }
@@ -38,8 +36,9 @@ pipeline {
             steps {
                 echo "Building.."
                 sh '''
-                go build main.go
                 go mod download
+                go build main.go
+                docker compose build 
                 '''
             }
         }
@@ -56,6 +55,7 @@ pipeline {
                 echo 'Deliver....'
                 sh '''
                 echo "doing delivery stuff.."
+                docker compose push
                 '''
             }
         }

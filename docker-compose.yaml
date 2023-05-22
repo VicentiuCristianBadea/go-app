@@ -4,7 +4,7 @@ services:
     build:
         context: . 
         dockerfile: dockerfile
-    image: go-app-ms:latest
+    image: vilybadea/go-app:latest
     restart: always
     networks:
       - web
