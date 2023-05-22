@@ -52,7 +52,7 @@ pipeline {
                 container('docker'){
                     sh '''
                         chmod +x ./scripts/getVersion.sh 
-                        ./getVersion.sh
+                        ./scripts/getVersion.sh
                         docker compose build
                     '''
                 } 
