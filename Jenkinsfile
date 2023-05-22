@@ -35,7 +35,7 @@ pipeline {
                     sh 'docker compose version'
                 }
                 container('golang'){
-                    sh 'go --version'
+                    sh 'go version'
                 }
             }
         }
