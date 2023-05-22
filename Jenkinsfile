@@ -6,6 +6,13 @@ pipeline {
         kind: Pod
         spec:
           containers:
+          - name: jnlp
+            image: jenkins/inbound-agent:latest
+            imagePullPolicy: Always
+            args: ['\$(JENKINS_SECRET)', '\$(JENKINS_NAME)']
+            volumeMounts:
+                - mountPath: /home/jenkins
+                  name: workspace-volume
           - name: golang
             image: golang:1.16
             command:
