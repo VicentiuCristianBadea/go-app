@@ -1,15 +1,6 @@
 pipeline {
-      agent {
-        docker { image 'node:18.16.0-alpine' }
-    }
-
+    agent any
     stages {
-         stage('Initialize'){
-            steps{
-                def dockerHome = tool 'docker-latest'
-                env.PATH = "${dockerHome}/bin:${env.PATH}"
-            }
-        }
         stage("Verify tooling"){
             steps {
                 sh 'docker version'
