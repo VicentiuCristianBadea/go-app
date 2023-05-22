@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 echo 'Testing 2 things. I want to see the current tag increments, and if the new tag is exported as an environment variable.'
 
