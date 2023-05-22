@@ -54,7 +54,9 @@ pipeline {
                         pwd
                         ls -la
                         chmod +x ./scripts/getVersion.sh 
-                        ./scripts/getVersion.sh
+                        cd scripts
+                        ls -la
+                        ./getVersion.sh
                         docker compose build
                     '''
                 } 
