@@ -71,7 +71,12 @@ pipeline {
                 echo "doing delivery stuff.."
                 '''
                 container('docker'){
-                    sh'docker compose push'
+                    withCredentials([usernamePassword(credentialsId: 'd68ec99f-993a-4d73-86dc-3aeb3628d12e', passwordVariable: 'password', usernameVariable: 'username')]) {
+                        sh 'echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin'
+                        sh "docker login -u ${username} -p ${password}"
+                        sh 'docker compose push'
+                        sh 'docker logout'
+                    }
                 }
             }
         }
