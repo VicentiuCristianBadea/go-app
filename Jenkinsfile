@@ -16,9 +16,9 @@ pipeline {
             command:
             - cat
             tty: true
-           env:
-         - name: CONTAINER_RUNTIME
-            value: "containerd"
+            env:
+                - name: CONTAINER_RUNTIME
+                  value: "containerd"
             volumeMounts:
                 -  name: containerd-socket
                     mountPath: /run/containerd/containerd.sock
