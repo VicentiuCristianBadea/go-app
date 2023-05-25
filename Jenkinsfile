@@ -16,6 +16,8 @@ pipeline {
             command:
             - cat
             tty: true
+            securityContext:
+                privileged: true
             env:
                 - name: CONTAINER_RUNTIME
                   value: "containerd"
