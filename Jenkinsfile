@@ -28,10 +28,10 @@ pipeline {
                     cpu: "500m"
                 limits:
                     cpu: "1000m"
-         volumes:
+        volumes:
           - name: containerd-socket
             hostPath:
-              path: /run/containerd/containerd.sock   
+            path: /run/containerd/containerd.sock   
         '''
     }
   }
