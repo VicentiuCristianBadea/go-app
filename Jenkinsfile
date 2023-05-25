@@ -20,18 +20,18 @@ pipeline {
                 - name: CONTAINER_RUNTIME
                   value: "containerd"
             volumeMounts:
-                -  name: containerd-socket
-                    mountPath: /run/containerd/containerd.sock
-                    readOnly: true
+                - name: containerd-socket
+                  mountPath: /run/containerd/containerd.sock
+                  readOnly: true
             resources:
                 requests:
                     cpu: "500m"
                 limits:
                     cpu: "1000m"
          volumes:
-            -  name: containerd-socket
-                hostPath:
-                    path: /run/containerd/containerd.sock   
+          - name: containerd-socket
+            hostPath:
+              path: /run/containerd/containerd.sock   
         '''
     }
   }
