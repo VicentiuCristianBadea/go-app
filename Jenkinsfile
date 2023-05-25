@@ -16,20 +16,22 @@ pipeline {
             command:
             - cat
             tty: true
+           env:
+         - name: CONTAINER_RUNTIME
+            value: "containerd"
             volumeMounts:
-             - mountPath: /var/run/docker.sock
-               hostPath: 
-                    path: /var/run/docker.sock
-               name: docker-sock
+                -  name: containerd-socket
+                    mountPath: /run/containerd/containerd.sock
+                    readOnly: true
             resources:
                 requests:
                     cpu: "500m"
                 limits:
                     cpu: "1000m"
-          volumes:
-          - name: docker-sock
-            hostPath:
-              path: /var/run/docker.sock    
+         volumes:
+            -  name: containerd-socket
+                hostPath:
+                    path: /run/containerd/containerd.sock   
         '''
     }
   }
