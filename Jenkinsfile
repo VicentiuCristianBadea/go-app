@@ -22,7 +22,7 @@ pipeline {
                 - name: CONTAINER_RUNTIME
                   value: "containerd"
             volumeMounts:
-                - name: containerd-socket
+                - name: docker-sock
                   mountPath: /run/containerd/containerd.sock
                   readOnly: true
             resources:
@@ -31,7 +31,7 @@ pipeline {
                 limits:
                     cpu: "1000m"
         volumes:
-          - name: containerd-socket
+          - name: docker-sock
             hostPath:
             path: /run/containerd/containerd.sock   
         '''
