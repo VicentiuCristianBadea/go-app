@@ -18,9 +18,6 @@ pipeline {
             tty: true
             securityContext:
                 privileged: true
-            env:
-                - name: CONTAINER_RUNTIME
-                  value: "containerd"
             volumeMounts:
                 - name: docker-sock
                   mountPath: /run/containerd/containerd.sock
