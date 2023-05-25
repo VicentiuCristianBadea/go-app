@@ -19,18 +19,18 @@ pipeline {
             securityContext:
                 privileged: true
             volumeMounts:
-                - name: docker-sock
-                  mountPath: /run/containerd/containerd.sock
-                  readOnly: true
+            - name: containerd-sock
+              mountPath: /run/containerd/containerd.sock
+              readOnly: true
             resources:
                 requests:
                     cpu: "500m"
                 limits:
                     cpu: "1000m"
         volumes:
-          - name: docker-sock
-            hostPath:
-            path: /run/containerd/containerd.sock   
+        - name: containerd-sock
+          hostPath:
+          path: /run/containerd/containerd.sock   
         '''
     }
   }
