@@ -16,21 +16,18 @@ pipeline {
             command:
             - cat
             tty: true
-            securityContext:
-                privileged: true
             volumeMounts:
-            - name: containerd-sock
-              mountPath: /run/containerd/containerd.sock
-              readOnly: true
+             - mountPath: /var/run/docker.sock
+               name: docker-sock
             resources:
                 requests:
                     cpu: "500m"
                 limits:
                     cpu: "1000m"
-        volumes:
-        - name: containerd-sock
-          hostPath:
-          path: /run/containerd/containerd.sock   
+          volumes:
+          - name: docker-sock
+            hostPath:
+              path: /var/run/docker.sock    
         '''
     }
   }
